@@ -5,39 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5.MyForms"
         mc:Ignorable="d"
-        Title="Добавить пользователя" Height="450" Width="800">
-    <Grid Height="434" VerticalAlignment="Bottom">
+        Title="Добавить пользователя" 
+        MinHeight="500" MinWidth="550"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        >
+    <Grid  VerticalAlignment="Top" 
+           MinHeight="500" MinWidth="500"
+           HorizontalAlignment="Center" Margin="25">
         <Grid.RowDefinitions>
-            <RowDefinition Height="27*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="41*"/>
-            <RowDefinition Height="51*"/>
-            <RowDefinition Height="49*"/>
-            <RowDefinition Height="144*"/>
+            <RowDefinition Height="1*"  />
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="20*" MinWidth="200"/>
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0"
-               Grid.Row="1" Margin="239,0,0,0"
+               Grid.Row="1" Margin="20,0,0,0"
                VerticalAlignment="Center"
-               HorizontalAlignment="Left"
+               HorizontalAlignment="Right"
                >Укажите имя пользователя</Label>
 
-        <TextBox Grid.Column="1" Grid.Row="1" Name="tbName"
+        <TextBox Grid.Column="1" Grid.Row="1" Name="tbName" MinWidth="350"
          VerticalAlignment="Center"
-                 Margin="5,0,0,0"
+                 Margin="0,0,2,0"
                  Padding="5"
                  HorizontalContentAlignment="Center" />
 
         <Label Grid.Column="0"
-               Grid.Row="2" Margin="261,0,0,0"
+               Grid.Row="2" 
+               Margin="0,0,2,0"
                VerticalAlignment="Center"
-               HorizontalAlignment="Left"
+               HorizontalAlignment="Right"
                >Выберите  фотографию</Label>
 
         <ComboBox Grid.Column="1"

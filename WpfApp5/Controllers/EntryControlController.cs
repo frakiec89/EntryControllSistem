@@ -22,18 +22,19 @@ namespace WpfApp5.Controllers
             try
             {
                 List<DB.Acaunt> acaunts = MyContext.Acaunts.ToList(); // список пользователей  
-                foreach (var item in acaunts)
+                foreach (var acauntDb in acaunts)
                 {
-                    var  newModelAcaunting  = new ModelView.EntryControlView();
-                    newModelAcaunting.NameEdnMessage = $"Пользователь: {item.Name} -->>> последний вход {GetLastEntry(item.AcauntId)}";
-                    newModelAcaunting.MyPathImage = @"pack://application:,,,/AcauntImage/" + item.PathImage;
 
-                    newModelAcaunting.ColorBorder = GetColorColorBorder(DateTime.Now , item.AcauntId);
-                    newModelAcaunting.ColorBorder2 = GetColorColorBorder(DateTime.Now.AddDays(-1), item.AcauntId);
-                    newModelAcaunting.ColorBorder3 = GetColorColorBorder(DateTime.Now.AddDays(-2), item.AcauntId);
-                    newModelAcaunting.ColorBorder4 = GetColorColorBorder(DateTime.Now.AddDays(-3), item.AcauntId);
-                    newModelAcaunting.ColorBorder5 = GetColorColorBorder(DateTime.Now.AddDays(-4), item.AcauntId);
-                    
+                    var  newModelAcaunting  = new ModelView.EntryControlView();
+                    newModelAcaunting.NameEdnMessage = $"Пользователь: {acauntDb.Name} -->>> последний вход {GetLastEntry(acauntDb.AcauntId)}";
+                    newModelAcaunting.MyPathImage = @"pack://application:,,,/AcauntImage/" + acauntDb.PathImage;
+
+                    newModelAcaunting.ColorBorder = GetColorColorBorder(DateTime.Now , acauntDb.AcauntId);
+                    newModelAcaunting.ColorBorder2 = GetColorColorBorder(DateTime.Now.AddDays(-1), acauntDb.AcauntId);
+                    newModelAcaunting.ColorBorder3 = GetColorColorBorder(DateTime.Now.AddDays(-2), acauntDb.AcauntId);
+                    newModelAcaunting.ColorBorder4 = GetColorColorBorder(DateTime.Now.AddDays(-3), acauntDb.AcauntId);
+                    newModelAcaunting.ColorBorder5 = GetColorColorBorder(DateTime.Now.AddDays(-4), acauntDb.AcauntId);
+                    newModelAcaunting.IdAccaunt = acauntDb.AcauntId;
                     listResult.Add(newModelAcaunting);
                 }
 

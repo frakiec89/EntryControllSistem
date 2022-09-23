@@ -53,8 +53,9 @@ namespace WpfApp5
                 var randomIdlist = myContext.Acaunts.Select(x => x.AcauntId).ToList();
                 int id = randomIdlist[random.Next(0, randomIdlist.Count)];
                 var randomUser = myContext.Acaunts.Single(x => x.AcauntId == id );
+              
                 var randomData = DateTime.Now;
-                randomData = randomData.AddDays(-random.Next(0, 5)).AddHours(-random.Next(0,59)).AddMinutes(random.Next(0,59));
+                randomData = randomData.AddDays(-random.Next(0, 5)).AddHours(-random.Next(0,24)).AddMinutes(random.Next(0,59));
                 var newEntry = new DB.EntryControl()
                 {
                     AcauntId = randomUser.AcauntId,
@@ -62,6 +63,7 @@ namespace WpfApp5
                 };
                 myContext.EntryControls.Add(newEntry);
                 myContext.SaveChanges();
+                MessageBox.Show($"Пользователь  {randomUser.Name} совершил вход  в {newEntry.DateTimeEntryControl}");
                 MainWindow_Loaded(null, e);
 
             }
@@ -70,6 +72,19 @@ namespace WpfApp5
 
                 throw;
             }
+
+        }
+
+        private void GoToAcauntClick(object sender, RoutedEventArgs e)
+        {
+            var b = e.OriginalSource as Button;
+            var acaunt = b.DataContext as ModelView.EntryControlView;
+
+            MyForms.UserAcauntingWindows windows = new MyForms.UserAcauntingWindows(acaunt.IdAccaunt);
+            windows.ShowDialog();
+            
+            if(windows.isSafe == true)
+                MainWindow_Loaded(null, e);
 
         }
     }

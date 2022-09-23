@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5"
         mc:Ignorable="d"
-        Title="Система учета  входов" Height="450" Width="800">
+        FontSize="20"
+        Title="Система учета  входов" MinHeight="450" MinWidth="800" 
+        SizeToContent="Width"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -61,27 +64,32 @@
 
         </StackPanel>
 
-        <Grid Grid.Column="1">
-            <ListBox Name="listContent">
+        <Grid Grid.Column="1" Margin="5">
+            <ListBox Name="listContent" BorderBrush="Black" BorderThickness="1">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="10*"/>
-                                <ColumnDefinition Width="10*"/>
-                                <ColumnDefinition Width="10*"/>
-                                <ColumnDefinition Width="10*"/>
-                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="auto"  />
+                                <ColumnDefinition Width="*"  />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition  Height="1*"/>
+                                <RowDefinition  Height="2*" />
                                 <RowDefinition  Height="2*"/>
                             </Grid.RowDefinitions>
 
+                           
+                            
+
                             <Border Grid.Column="0" BorderThickness="2"
-                                    BorderBrush="Black"
-                                    Grid.Row="0" Grid.RowSpan="2"
+                                    BorderBrush="Black" CornerRadius="10"
+                                    Grid.Row="0" Grid.RowSpan="3"
                                     >
                                 <Image MaxHeight="50" MinHeight="49"
                                        MaxWidth="50"  MinWidth="49"
@@ -89,14 +97,14 @@
                                        />
                             </Border>
 
-                            <Label 
-                                Margin="5" Padding="5"
+                            <Label  MinWidth="800"  MaxWidth="1000"
+                                Margin="5" Padding="5"  HorizontalAlignment="Center"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="5"
                                 Grid.Row="0"
                                 Content="{Binding NameEdnMessage}" />
                             <!--1-->
-                            <Border Grid.Column="1" MinHeight="3"
+                            <Border Grid.Column="1" MinHeight="5" 
                                     Grid.Row="1" BorderThickness="1"
                                     BorderBrush="Black"
                                     Margin="5,2,2,2"
@@ -135,7 +143,21 @@
                                 Background="{Binding ColorBorder5}"    
                                     >
                             </Border>
+                            <Label Grid.Row="2" Grid.Column="1">сегодня</Label>
+                            <Label Grid.Row="2" Grid.Column="2"> вчера </Label>
+                            <Label Grid.Row="2" Grid.Column="3">2 д.н  </Label>
+                            <Label Grid.Row="2" Grid.Column="4">3 д.н  </Label>
+                            <Label Grid.Row="2" Grid.Column="5">4 д.н  </Label>
 
+                            <Button
+                                Margin="25,5,5,5" Padding="5" 
+                                HorizontalAlignment="Right"
+                                Click="GoToAcauntClick"
+                                VerticalAlignment="Bottom"
+                                Grid.Column="6" Grid.Row="0" Grid.RowSpan="3">
+                                в  профиль
+                            </Button>
+                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
