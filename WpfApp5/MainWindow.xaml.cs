@@ -46,7 +46,6 @@ namespace WpfApp5
         {
 
             DB.MyContext myContext = new DB.MyContext();
-
             try
             {
                 Random random = new Random();
@@ -56,6 +55,7 @@ namespace WpfApp5
               
                 var randomData = DateTime.Now;
                 randomData = randomData.AddDays(-random.Next(0, 5)).AddHours(-random.Next(0,24)).AddMinutes(random.Next(0,59));
+
                 var newEntry = new DB.EntryControl()
                 {
                     AcauntId = randomUser.AcauntId,
@@ -67,12 +67,10 @@ namespace WpfApp5
                 MainWindow_Loaded(null, e);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show(ex.Message);
             }
-
         }
 
         private void GoToAcauntClick(object sender, RoutedEventArgs e)
@@ -80,12 +78,12 @@ namespace WpfApp5
             var b = e.OriginalSource as Button;
             var acaunt = b.DataContext as ModelView.EntryControlView;
 
-            MyForms.UserAcauntingWindows windows = new MyForms.UserAcauntingWindows(acaunt.IdAccaunt);
+            MyForms.UserAcauntingWindows windows = 
+                new MyForms.UserAcauntingWindows(acaunt.IdAccaunt);
             windows.ShowDialog();
             
             if(windows.isSafe == true)
-                MainWindow_Loaded(null, e);
-
+                MainWindow_Loaded(null, new RoutedEventArgs());
         }
     }
 }

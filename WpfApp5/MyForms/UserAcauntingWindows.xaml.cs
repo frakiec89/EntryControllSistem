@@ -97,27 +97,29 @@ namespace WpfApp5.MyForms
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-
             var resDialog =  MessageBox.Show("Вы увееры  что  хотите  удалить  записи ?",
                 "Внимание!!", MessageBoxButton.YesNo, MessageBoxImage.Question);
          
             if (resDialog == MessageBoxResult.No)
                 return; 
-
             try
             {
                 var entrySelect = dataGridAcauntimg.SelectedItems;
                 MyContext myContext = new MyContext();
+                List< DB.EntryControl> removList =new List< DB.EntryControl>();
                 foreach (var row in entrySelect)
                 {
                     DB.EntryControl entryControl = row as DB.EntryControl;
                    
                     if(entryControl!=null)
                     {
-                        myContext.EntryControls.Remove(entryControl);
+                        removList.Add(entryControl);
                     }
-                                   }
+                }
+                myContext.EntryControls.RemoveRange(removList);
                 myContext.SaveChanges();
+
+
                 MessageBox.Show("все записи удалены ");
             }
             catch (Exception ex)
@@ -130,10 +132,6 @@ namespace WpfApp5.MyForms
                 isSafe = true;
                 UserAcauntingWindows_Loaded(null, null);
             }
-
-
-          
-           
         }
     }
 }

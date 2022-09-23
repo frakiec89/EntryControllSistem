@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace WpfApp5.Controllers
 {
@@ -24,9 +25,10 @@ namespace WpfApp5.Controllers
                 List<DB.Acaunt> acaunts = MyContext.Acaunts.ToList(); // список пользователей  
                 foreach (var acauntDb in acaunts)
                 {
-
                     var  newModelAcaunting  = new ModelView.EntryControlView();
-                    newModelAcaunting.NameEdnMessage = $"Пользователь: {acauntDb.Name} -->>> последний вход {GetLastEntry(acauntDb.AcauntId)}";
+
+                    newModelAcaunting.NameEdnMessage = $"Пользователь: {acauntDb.Name} -->>> " +
+                        $"последний вход {GetLastEntry(acauntDb.AcauntId)}";
                     newModelAcaunting.MyPathImage = @"pack://application:,,,/AcauntImage/" + acauntDb.PathImage;
 
                     newModelAcaunting.ColorBorder = GetColorColorBorder(DateTime.Now , acauntDb.AcauntId);
@@ -82,9 +84,17 @@ namespace WpfApp5.Controllers
                var  data  = MyContext.EntryControls.Where(x => x.AcauntId == acauntId).Max(x => x.DateTimeEntryControl);
                 return data.ToLongDateString();
             }
-            catch 
+            catch  (ArgumentNullException ex)
             {
                 return "--No--";
+            }
+            catch (InvalidOperationException ex)
+            {
+                return "--No--";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ошибка  при  обращении  к БД ");
             }
 
         }
