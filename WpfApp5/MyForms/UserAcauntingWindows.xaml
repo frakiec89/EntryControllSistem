@@ -29,7 +29,16 @@
                 BorderThickness="2"
                 BorderBrush="Black"
                 >
-            <Image x:Name="imageAcaunt">
+            <Border.ContextMenu >
+                <ContextMenu>
+                    <MenuItem Header="Сменить  картинку" 
+                                  Click="MenuItem_Click"
+                                  />
+                </ContextMenu>
+            </Border.ContextMenu>
+
+            <Image x:Name="imageAcaunt"  >
+               
             </Image>
         </Border>
 

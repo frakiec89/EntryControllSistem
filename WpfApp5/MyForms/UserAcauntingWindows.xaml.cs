@@ -133,5 +133,28 @@ namespace WpfApp5.MyForms
                 UserAcauntingWindows_Loaded(null, null);
             }
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            MyForms.ImageBox imageBox = new ImageBox();
+          
+            if (  imageBox.ShowDialog() == true )
+            {
+                DB.MyContext myContext = new DB.MyContext();
+                try
+                {
+                    _Acaunt.PathImage = imageBox.SelectImage.Name;
+                    myContext.Acaunts.Update(_Acaunt);
+                    myContext.SaveChanges();
+                    isSafe = true;
+                    UserAcauntingWindows_Loaded(null, e);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
     }
 }

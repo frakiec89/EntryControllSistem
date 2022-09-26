@@ -14,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfApp5.Controllers;
+using WpfApp5.ModelView;
 using static System.Net.WebRequestMethods;
 
 namespace WpfApp5.MyForms
@@ -31,34 +33,9 @@ namespace WpfApp5.MyForms
 
         private void AddAcauntWindows_Loaded(object sender, RoutedEventArgs e)
         {
-            cbImage.ItemsSource = GetImage();
+            cbImage.ItemsSource = ImageController.GetImage();
         }
-
-        private List<ModelComboxImageAcaunt> GetImage()
-        {
-            List<ModelComboxImageAcaunt> acaunts = new List<ModelComboxImageAcaunt>();
-            Assembly  assembly =  Assembly.GetExecutingAssembly();
-            string ddlStart = assembly.Location; // полный путь   к  dll 
-            string dirImage = System.IO.Path.GetDirectoryName(ddlStart);
-            dirImage = dirImage + "/AcauntImage";
-            var files = Directory.GetFiles(dirImage);
-
-            var absolutPathFele =  files.Where(
-                x =>x.ToLower().EndsWith(".png")
-                || x.ToLower().EndsWith(".jpeg")
-                 || x.ToLower().EndsWith(".jpg")
-                ).ToArray();
-
-            foreach (var file  in absolutPathFele)
-            {
-                var name =  System.IO.Path.GetFileName(file);
-                var path = @"pack://application:,,,/AcauntImage/" +name;
-                var newImage = new ModelComboxImageAcaunt() { Name= name , Path=path};
-                acaunts.Add(newImage);
-            }
-            return acaunts;
-          
-        }
+      
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
@@ -67,7 +44,7 @@ namespace WpfApp5.MyForms
             {
                 var newAcaunt = new DB.Acaunt();
                 newAcaunt.Name = tbName.Text;
-                var image = cbImage.SelectedItem as ModelComboxImageAcaunt;
+                var image = cbImage.SelectedItem as ModelImage;
                 if (image != null)
                 newAcaunt.PathImage = image.Name;
                 else
@@ -93,10 +70,5 @@ namespace WpfApp5.MyForms
         }
     }
 
-    public  class ModelComboxImageAcaunt
-    {
-        public  string Name { get; set; }
-        public string Path { get; set; }
-
-    }
+   
 }
