@@ -27,6 +27,8 @@ namespace WpfApp5.Controllers
                 {
                     var  newModelAcaunting  = new ModelView.EntryControlView();
 
+                    newModelAcaunting.Name = acauntDb.Name;
+
                     newModelAcaunting.NameEdnMessage = $"Пользователь: {acauntDb.Name} -->>> " +
                         $"последний вход {GetLastEntry(acauntDb.AcauntId)}";
                     newModelAcaunting.MyPathImage = @"pack://application:,,,/AcauntImage/" + acauntDb.PathImage;

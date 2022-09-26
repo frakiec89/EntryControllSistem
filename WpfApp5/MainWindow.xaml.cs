@@ -22,6 +22,8 @@ namespace WpfApp5
     /// </summary>
     public partial class MainWindow : Window
     {
+
+         List<ModelView.EntryControlView> entries ;
         public MainWindow()
         {
             InitializeComponent();
@@ -30,9 +32,16 @@ namespace WpfApp5
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            var entryControlController = new Controllers.EntryControlController();
+            entries = new List<EntryControlView>();
+            entries = entryControlController.GetEntryControlTheLastFiveDays();
+            listContent.ItemsSource = entries;
+            GetCountForLabel();
+        }
 
-            Controllers.EntryControlController entryControlController = new Controllers.EntryControlController();
-            listContent.ItemsSource = entryControlController.GetEntryControlTheLastFiveDays();
+        private void GetCountForLabel()
+        {
+            lbCountList.Content =  $"Пользователей в списке: {listContent.Items.Count}";
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -84,6 +93,28 @@ namespace WpfApp5
             
             if(windows.isSafe == true)
                 MainWindow_Loaded(null, new RoutedEventArgs());
+        }
+
+        
+
+        private void tbSource_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(string.IsNullOrEmpty(tbSource.Text))
+                listContent.ItemsSource = entries;
+
+            var res = entries.Where(x => x.Name.ToUpper().Contains(tbSource.Text.ToUpper()));
+
+            if (res.Count()>0)
+            {
+                listContent.ItemsSource = res;
+                
+            }
+               
+            else
+                MessageBox.Show("Пользователь  с такии  именем не найден");
+
+
+            GetCountForLabel();
         }
     }
 }

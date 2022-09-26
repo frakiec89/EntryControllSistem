@@ -8,6 +8,8 @@ namespace WpfApp5.ModelView
 {
     internal class EntryControlView
     {
+
+        public string Name { get; set; }
         public int IdAccaunt { get; set; }
         public  string MyPathImage { get; set; }
         public string NameEdnMessage { get; set; }

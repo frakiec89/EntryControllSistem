@@ -61,6 +61,20 @@
             </Button>
 
 
+            <Label Margin="5,5,4,0" HorizontalAlignment="Center"
+                   VerticalAlignment="Top" VerticalContentAlignment="Top"
+                  >Поиск:</Label>
+
+            <TextBox x:Name="tbSource"
+                     Margin="5,1,5,5"
+                   TextChanged="tbSource_TextChanged"
+                     ></TextBox>
+
+            <Label
+                Margin="5"
+                Name="lbCountList" ></Label>
+          
+
 
         </StackPanel>
 
