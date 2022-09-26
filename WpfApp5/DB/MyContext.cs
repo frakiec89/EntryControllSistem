@@ -13,15 +13,12 @@ namespace WpfApp5.DB
             "Server=192.168.10.160; database=AhtyamovInOutDB;" +
             " user id = stud; password=stud;";
 
-        private string cs1 =
-            "Server=85.236.170.148,444; database=AhtyamovInOutDB;" +
-            " user id = stud; password=stud;";
-
+        
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           optionsBuilder.UseSqlServer(cs1  );
+           optionsBuilder.UseSqlServer(cs  );
         }
 
         public DbSet<Acaunt> Acaunts { get; set; }

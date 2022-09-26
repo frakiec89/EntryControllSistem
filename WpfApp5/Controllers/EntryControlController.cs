@@ -17,7 +17,7 @@ namespace WpfApp5.Controllers
             MyContext = new DB.MyContext();
         }
 
-        internal List<ModelView.EntryControlView> GetEntryControlTheLastFiveDays()
+        internal List<ModelView.EntryControlView> GetEntryControlTheLastFiveDays( )
         {
            var listResult =  new List<ModelView.EntryControlView>();
             try

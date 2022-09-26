@@ -14,9 +14,14 @@ namespace WpfApp5.Controllers
         public static List<ModelImage> GetImage()
         {
             List<ModelImage> acaunts = new List<ModelImage>();
+
             Assembly assembly = Assembly.GetExecutingAssembly();
+
             string ddlStart = assembly.Location; // полный путь   к  dll 
+
             string dirImage = System.IO.Path.GetDirectoryName(ddlStart);
+
+
             dirImage = dirImage + "/AcauntImage";
             var files = Directory.GetFiles(dirImage);
 

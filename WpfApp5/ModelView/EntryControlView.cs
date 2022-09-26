@@ -11,6 +11,8 @@ namespace WpfApp5.ModelView
 
         public string Name { get; set; }
         public int IdAccaunt { get; set; }
+
+
         public  string MyPathImage { get; set; }
         public string NameEdnMessage { get; set; }
         public string ColorBorder { get; set; }
