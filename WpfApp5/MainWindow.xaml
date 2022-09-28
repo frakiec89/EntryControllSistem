@@ -70,6 +70,24 @@
                    TextChanged="tbSource_TextChanged"
                      ></TextBox>
 
+            <Border BorderBrush="Black" BorderThickness="1"    Margin="5,1,5,5">
+                <StackPanel Margin="5"   >
+                    <RadioButton
+                        HorizontalContentAlignment="Left" 
+                        Checked="cbNoSorting_Checked"
+                        HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                        x:Name="cbNoSorting" >Без сортировки</RadioButton>
+                    <RadioButton 
+                         Checked="cbNoSorting_Checked"
+                         HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"  VerticalContentAlignment="Center"
+                        x:Name="cbUpName" >По возрастанию</RadioButton>
+                    <RadioButton 
+                         Checked="cbNoSorting_Checked"
+                         HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                        x:Name="cbDown" >По убыванию</RadioButton>
+                </StackPanel>
+            </Border>
+            
             <Label
                 Margin="5"
                 Name="lbCountList" ></Label>
@@ -79,7 +97,13 @@
         </StackPanel>
 
         <Grid Grid.Column="1" Margin="5">
-            <ListBox Name="listContent" BorderBrush="Black" BorderThickness="1">
+            <ListBox Name="listContent" BorderBrush="Black" BorderThickness="1" MouseDoubleClick="listContent_MouseDoubleClick">
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Перейти профиль  пользователя" Click="MenuItem_Click" />
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+                
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -97,9 +121,6 @@
                                 <RowDefinition  Height="2*" />
                                 <RowDefinition  Height="2*"/>
                             </Grid.RowDefinitions>
-
-                           
-                            
 
                             <Border Grid.Column="0" BorderThickness="2"
                                     BorderBrush="Black" CornerRadius="10"
@@ -171,7 +192,6 @@
                                 Grid.Column="6" Grid.Row="0" Grid.RowSpan="3">
                                 в  профиль
                             </Button>
-                            
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

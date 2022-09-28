@@ -66,7 +66,7 @@ namespace WpfApp5.MyForms
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             _Acaunt.Name = tbName.Text;
-
+            
             DB.MyContext myContext = new DB.MyContext();
             try
             {
@@ -76,7 +76,6 @@ namespace WpfApp5.MyForms
                 isSafe = true;
                 MessageBox.Show("Провель  пересохранен  в  базе  данных");
                 UserAcauntingWindows_Loaded(null, e);
-              
             }
             catch (Exception ex)
             {
@@ -149,6 +148,31 @@ namespace WpfApp5.MyForms
                     myContext.SaveChanges();
                     isSafe = true;
                     UserAcauntingWindows_Loaded(null, e);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btDellAccaunt_Click(object sender, RoutedEventArgs e)
+        {
+           var dialog =   MessageBox.Show($"Вы уверены что вы  хотите удалить  пользователя? \n" +
+                $" Все истории  входа  пользователя {_Acaunt.Name} будут  удалены" , "Важно!!!" , MessageBoxButton.OKCancel , MessageBoxImage.Warning);
+
+            if (dialog == MessageBoxResult.OK)
+            {
+                DB.MyContext myContext = new DB.MyContext();
+                try
+                {
+
+                    myContext.EntryControls.RemoveRange(myContext.EntryControls.Where(x => x.AcauntId == _acauntId));
+                    myContext.Acaunts.Remove(_Acaunt);
+                    myContext.SaveChanges();
+                    isSafe = true;
+                    MessageBox.Show("Пользователь  удален !!!");
+                    Close();
                 }
                 catch (Exception ex)
                 {
