@@ -57,7 +57,8 @@ namespace WpfApp5.Controllers
 
             try
             {
-               var flag =  MyContext.EntryControls.Any(x => x.AcauntId == acauntId && x.DateTimeEntryControl >= dataMin && x.DateTimeEntryControl < dataMax);
+               var flag =  MyContext.EntryControls.Any(x => x.AcauntId == acauntId 
+               && x.DateTimeEntryControl >= dataMin && x.DateTimeEntryControl < dataMax);
                 if (flag)
                     return "Red";
                 else return "Black";
@@ -69,10 +70,6 @@ namespace WpfApp5.Controllers
         }
 
      
-
-
-
-
         /// <summary>
         /// находит  последнию дату  входа у  пользователя 
         /// </summary>
