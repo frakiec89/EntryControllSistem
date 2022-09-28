@@ -188,9 +188,17 @@
                                 Margin="25,5,5,5" Padding="5" 
                                 HorizontalAlignment="Right"
                                 Click="GoToAcauntClick"
+                                Content="инфо."
                                 VerticalAlignment="Bottom"
                                 Grid.Column="6" Grid.Row="0" Grid.RowSpan="3">
-                                в  профиль
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <Label>Перейти  в  профиль пользователя</Label>
+                                        <Label>Так же можно попасть  в профиль через контекстное меню</Label>
+                                        <Label>Или через двойной клик  мышью </Label>
+                                    </StackPanel>
+                                </Button.ToolTip>
+                               
                             </Button>
                         </Grid>
                     </DataTemplate>

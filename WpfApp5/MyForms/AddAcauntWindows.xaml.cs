@@ -33,39 +33,45 @@ namespace WpfApp5.MyForms
 
         private void AddAcauntWindows_Loaded(object sender, RoutedEventArgs e)
         {
-            cbImage.ItemsSource = ImageController.GetImage();
+            cbImage.ItemsSource = ImageController.GetImage(); // получам картинки  из контроллера  в  комбобокс 
         }
       
-
+        /// <summary>
+        /// добавить пользователя  в  бд
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            DB.MyContext myContext = new DB.MyContext();
+            DB.MyContext myContext = new DB.MyContext(); // подключение  к  бд 
             try
             {
-                var newAcaunt = new DB.Acaunt();
-                newAcaunt.Name = tbName.Text;
-                var image = cbImage.SelectedItem as ModelImage;
-                if (image != null)
-                newAcaunt.PathImage = image.Name;
-                else
+                var newAcaunt = new DB.Acaunt(); // создаем нового  пользователя 
+                if (string.IsNullOrEmpty(tbName.Text)) // если пустое  имя 
                 {
-                    MessageBox.Show("Выберите картинку");
+                    MessageBox.Show("Укажите имя");
                     return;
                 }
-                myContext.Acaunts.Add(newAcaunt);
-                btnAddUser.IsEnabled = false;
-                myContext.SaveChanges();
-                btnAddUser.IsEnabled = true;
+
+                newAcaunt.Name = tbName.Text; // имя для него  из  текстбокса 
+                var image = cbImage.SelectedItem as ModelImage; // картинка из  комбобокса 
+                if (image != null) // если  не  нулевая  картинка 
+                newAcaunt.PathImage = image.Name; // акаунт  получает  название картинки  - будет  хронить ее  в бд 
+                else
+                {
+                    MessageBox.Show("Выберите картинку"); // иначе  выведем  пользователю 
+                    return; //выйдем 
+                }
+                myContext.Acaunts.Add(newAcaunt); // добавим акаунт в  бд  в  таблицу  Acaunts
+                btnAddUser.IsEnabled = false; // заблокируем  кнопку - что бы не  кто не нажал  два раза 
+                myContext.SaveChanges(); // отправим  в  бд 
                 MessageBox.Show("объект  добавлен  в  БД");
-                DialogResult = true; 
+                DialogResult = true;  // закроем  окно  с  диалогом true
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                btnAddUser.IsEnabled = true;
+                btnAddUser.IsEnabled = true; // в  случае ошибки   откроем кнопку  
             }
         }
     }

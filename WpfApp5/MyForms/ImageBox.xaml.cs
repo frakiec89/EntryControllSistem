@@ -20,7 +20,10 @@ namespace WpfApp5.MyForms
     public partial class ImageBox : Window
     {
 
-        internal ModelView.ModelImage SelectImage { get; set; } = new ModelView.ModelImage();     
+        /// <summary>
+        /// выбранная  картинка  
+        /// </summary>
+        internal ModelView.ModelImage SelectImage { get; set; } = new ModelView.ModelImage();      
         public ImageBox()
         {
             InitializeComponent();
@@ -29,15 +32,20 @@ namespace WpfApp5.MyForms
 
         private void ImageBox_Loaded(object sender, RoutedEventArgs e)
         {
-            listImage.ItemsSource = Controllers.ImageController.GetImage();
+            listImage.ItemsSource = Controllers.ImageController.GetImage(); // получаем  список  картинок  из  контроллера  в листбокс 
         }
 
+        /// <summary>
+        /// двойное  нажатие на  картинку 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listImage_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var s =(ModelView.ModelImage)listImage.SelectedItem;
-            if (s != null)
-                SelectImage = s;
-            DialogResult = true;
+            var s =(ModelView.ModelImage)listImage.SelectedItem; // запоминаем  выбранную  картинку  из  листа 
+            if (s != null) // если не пусто 
+                SelectImage = s; // запишем ее  в  поле 
+            DialogResult = true; // закроем  окно с результатом  true 
         }
     }
 }

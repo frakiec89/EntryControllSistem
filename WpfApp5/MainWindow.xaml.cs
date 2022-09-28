@@ -150,7 +150,11 @@ namespace WpfApp5
                 return; // просто  выйдем  
 
             MyForms.UserAcauntingWindows windows =  new MyForms.UserAcauntingWindows(acaunt.IdAccaunt); // создаем новое окно  - передаем  в  него  ид  пользователя 
+            
+            var color = this.Background;
+            Background = Brushes.AntiqueWhite;
             windows.ShowDialog(); // вызываем окно 
+            Background = color;
             
             if(windows.isSafe == true) // если профиль  изменился 
                 MainWindow_Loaded(null, new RoutedEventArgs()); // перегрузим окно  MainWindow

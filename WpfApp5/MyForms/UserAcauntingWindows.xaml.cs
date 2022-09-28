@@ -219,7 +219,6 @@ namespace WpfApp5.MyForms
                 DB.MyContext myContext = new DB.MyContext();
                 try
                 {
-
                     myContext.EntryControls.RemoveRange(myContext.EntryControls.Where(x => x.AcauntId == _acauntId)); // удалим  все входы  у пользователя 
                     myContext.Acaunts.Remove(_Acaunt); // удалим пользователя 
                     myContext.SaveChanges(); // обновимся в бд 
