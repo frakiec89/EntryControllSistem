@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5.MyForms"
         mc:Ignorable="d"
-        Title="ImageBox" MaxHeight="500" MaxWidth="250">
+        Title="ImageBox" MaxHeight="700" MaxWidth="250">
     <Grid >
         <ListBox  MouseDoubleClick="listImage_MouseDoubleClick"  x:Name="listImage">
             <ListBox.ItemTemplate>
