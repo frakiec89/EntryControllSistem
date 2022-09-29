@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp5.MyForms"
         mc:Ignorable="d"
-        Title="Новый отдел" MinHeight="200" MinWidth="300"
+        Title="Новый отдел" MinHeight="100" MinWidth="300"
         SizeToContent="WidthAndHeight"
         >
     <Grid>
-        <StackPanel>
+        <StackPanel Margin="5">
             <StackPanel Orientation="Horizontal">
                 <Label Margin="5">укажите имя отдела:</Label>
                 <TextBox x:Name="tbName" Margin="5"

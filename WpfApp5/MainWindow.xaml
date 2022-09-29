@@ -78,26 +78,32 @@
                 <StackPanel Margin="5"   >
                     <RadioButton
                         HorizontalContentAlignment="Left" 
-                        Checked="cbNoSorting_Checked"
+                        Checked="rbNoSorting_Checked"
                         HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                        x:Name="cbNoSorting" >Без сортировки</RadioButton>
+                        x:Name="rbNoSorting" >Без сортировки</RadioButton>
                     <RadioButton 
-                         Checked="cbNoSorting_Checked"
+                         Checked="rbNoSorting_Checked"
                          HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center"  VerticalContentAlignment="Center"
-                        x:Name="cbUpName" >По возрастанию</RadioButton>
+                        x:Name="rbUpName" >По возрастанию</RadioButton>
                     <RadioButton 
-                         Checked="cbNoSorting_Checked"
+                         Checked="rbNoSorting_Checked"
                          HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                        x:Name="cbDown" >По убыванию</RadioButton>
+                        x:Name="rbDown" >По убыванию</RadioButton>
                 </StackPanel>
             </Border>
+
+
+            <Label Margin="5,5,4,0" HorizontalAlignment="Center"
+                   VerticalAlignment="Top" VerticalContentAlignment="Top"
+                  >Фильтрация:</Label>
+            <ComboBox Name="cbFilter" Margin="5"
+                     
+                SelectionChanged="cbFilter_SelectionChanged"       ></ComboBox>
             
             <Label
                 Margin="5"
                 Name="lbCountList" ></Label>
-          
-
-
+            
         </StackPanel>
 
         <Grid Grid.Column="1" Margin="5">
@@ -136,7 +142,7 @@
                                        />
                             </Border>
 
-                            <Label  MinWidth="800"  MaxWidth="1000"
+                            <Label  MinWidth="1000"  MaxWidth="1200"
                                 Margin="5" Padding="5"  HorizontalAlignment="Center"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="5"

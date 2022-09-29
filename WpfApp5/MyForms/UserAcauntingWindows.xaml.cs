@@ -67,6 +67,7 @@ namespace WpfApp5.MyForms
                 tbName.Text = _Acaunt.Name; // задали полу  с  именем  пользователя 
                 dataGridAcauntimg.ItemsSource = myContext.EntryControls.Where(x=> x.AcauntId == _acauntId).  
                 OrderBy(x=>x.DateTimeEntryControl).ToList(); // нашли все входы пользователя в  бд  - отсортировали по дате 
+               
                 if (_Acaunt.Department != null)
                     lbDep.Content = _Acaunt.Department.Name;
                 else
@@ -106,7 +107,7 @@ namespace WpfApp5.MyForms
                 myContext.SaveChanges(); // сохранили изменение 
                 isStartFlag = false; // поменяли флаг  - это  событие  прошло не  при старте 
                 isSafe = true; // поменяли флаг   - при закрытие  этого окна нужно  будет  обновить  контент окна  mainWindows 
-                MessageBox.Show("Провель  пересохранен  в  базе  данных"); 
+                MessageBox.Show("Профиль  пересохранен  в  базе  данных"); 
                 UserAcauntingWindows_Loaded(null, e); // обновили окно 
             }
             catch (Exception ex)
@@ -242,7 +243,17 @@ namespace WpfApp5.MyForms
             if (departmentWindow.ShowDialog() == true)
             {
                 lbDep.Content = departmentWindow.selectDepetment.Name;
-                _Acaunt.DepartmentId = departmentWindow.selectDepetment.DepartmentId;
+                if(departmentWindow.selectDepetment.DepartmentId<0)
+                {
+                    _Acaunt.Department = null;
+                    _Acaunt.DepartmentId = null;
+                }
+                else
+                {
+                    _Acaunt.DepartmentId = departmentWindow.selectDepetment.DepartmentId;
+                    _Acaunt.Department = departmentWindow.selectDepetment;
+                }
+              
                 btnSave.Visibility = Visibility.Visible;
             }
         }

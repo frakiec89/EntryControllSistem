@@ -33,7 +33,10 @@ namespace WpfApp5.MyForms
             try
             {
                 DB.MyContext myContext = new DB.MyContext();
-                listboxDep.ItemsSource = myContext.Departments.OrderBy(x=>x.Name).ToList();
+                var list = new List<DB.Department>();
+                list.Add(new DB.Department { Name = "Без отдела", DepartmentId = -1 });
+                list.AddRange(myContext.Departments.OrderBy(x => x.Name).ToList());
+                listboxDep.ItemsSource = list;
             }
             catch (Exception)
             {

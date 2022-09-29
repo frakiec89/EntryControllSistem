@@ -41,7 +41,27 @@ namespace WpfApp5
             entries = entryControlController.GetEntryControlTheLastFiveDays(); // получили  контент из  БД за счет  контролера 
             listContent.ItemsSource = entries; // даем  контент лист боксу 
             GetCountForLabel(); // получаем кол-во  записей  
-            cbNoSorting.IsChecked = true; // выставляем фильтр без сортировки 
+            rbNoSorting.IsChecked = true; // выставляем фильтр без сортировки 
+            cbFilter.ItemsSource = GetContentDepartamens();
+            cbFilter.SelectedIndex = 0; 
+        }
+
+        private List<DB.Department> GetContentDepartamens()
+        {
+            try
+            {
+                DB.MyContext myContext = new DB.MyContext();
+                var res = new List<DB.Department>();
+                res.Add(new DB.Department { DepartmentId = -1, Name = "Без фильтрации" });
+                res.Add(new DB.Department { DepartmentId = -2, Name = "Без отдела" });
+                res.AddRange(myContext.Departments.OrderBy(x => x.Name).ToList());
+                return res;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ошибка базы  данных \n" + ex.Message);
+            }
+            return null;
         }
 
 
@@ -52,19 +72,19 @@ namespace WpfApp5
         {
             var content = listContent.ItemsSource as IEnumerable< EntryControlView> ; // заберем контент  из листбокса 
 
-            if (cbNoSorting.IsChecked == true) // если без сортировки  
+            if (rbNoSorting.IsChecked == true) // если без сортировки  
             {
                 listContent.ItemsSource = content.OrderBy(x => x.IdAccaunt); // отсортируем контент  по  ид  пользователя 
                 return; // выйдем  
             }
 
-            if (cbUpName.IsChecked == true) // если  по  возрастанию 
+            if (rbUpName.IsChecked == true) // если  по  возрастанию 
             {
                 listContent.ItemsSource = content.OrderBy(x=>x.Name); // // отсортируем контент  по  имени 
                 return;
             }
 
-            if (cbDown.IsChecked == true) // если по  убыванию 
+            if (rbDown.IsChecked == true) // если по  убыванию 
             {
                 listContent.ItemsSource = content.OrderByDescending(x => x.Name);// отсортируем контент  по  имени
                 return;
@@ -169,7 +189,14 @@ namespace WpfApp5
         private void tbSource_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(string.IsNullOrEmpty(tbSource.Text)) // если пустой 
+            {
                 listContent.ItemsSource = entries; // берем контен  из буфера 
+                rbNoSorting.IsChecked = true; // сбросим  фильтр
+                cbFilter.SelectedIndex = 0;
+                GetCountForLabel(); // получим  новый контент  кол-ва записей 
+                return;
+            }
+            
 
             var res = entries.Where(x => x.Name.ToUpper().Contains(tbSource.Text.ToUpper()));  // ищем колекцию   где есть  совпадения 
 
@@ -180,7 +207,8 @@ namespace WpfApp5
             else
                 MessageBox.Show("Пользователь  с таким  именем не найден"); //
 
-            cbNoSorting.IsChecked = true; // сбросим  фильтр  
+            rbNoSorting.IsChecked = true; // сбросим  фильтр
+            cbFilter.SelectedIndex = 0;                         // 
             GetCountForLabel(); // получим  новый контент  кол-ва записей 
         }
 
@@ -189,8 +217,9 @@ namespace WpfApp5
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cbNoSorting_Checked(object sender, RoutedEventArgs e)
+        private void rbNoSorting_Checked(object sender, RoutedEventArgs e)
         {
+            cbFilter.SelectedIndex = 0; 
             SortContent();  // вызываем метод 
         }
 
@@ -220,6 +249,41 @@ namespace WpfApp5
         {
             MyForms.AddDepartamentWindows addDepartamentWindows = new MyForms.AddDepartamentWindows();
             addDepartamentWindows.ShowDialog();
+
+            MainWindow_Loaded(null, e);
+        }
+
+        private void cbFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            rbNoSorting.IsChecked = true;
+            FilterContent();
+        }
+
+        private void FilterContent()
+        {
+            
+            var dep =  (cbFilter.SelectedItem as DB.Department); 
+            if(dep == null)
+                return;
+
+            var idDep = dep.DepartmentId;
+
+
+            if(idDep==-1)
+            {
+                listContent.ItemsSource = entries.OrderBy(x => x.IdAccaunt); // отсортируем контент  по  ид  пользователя 
+                GetCountForLabel();
+                return; // выйдем  
+            }
+
+            if (idDep == -2)
+            {
+                listContent.ItemsSource = entries.Where(x => x.idDepartment == null);
+                GetCountForLabel();
+                return;
+            }
+            listContent.ItemsSource = entries.Where(x=>x.idDepartment==idDep);
+            GetCountForLabel();
         }
     }
 }
