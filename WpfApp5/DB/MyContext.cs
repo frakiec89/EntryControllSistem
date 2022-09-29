@@ -15,7 +15,6 @@ namespace WpfApp5.DB
 
        
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.UseSqlServer(cs );
@@ -23,7 +22,7 @@ namespace WpfApp5.DB
 
         public DbSet<Acaunt> Acaunts { get; set; }
         public DbSet<EntryControl> EntryControls { get; set; }
-          
+        public DbSet<Department> Departments { get; set; }
 
     }
 }

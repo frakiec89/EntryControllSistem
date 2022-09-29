@@ -10,5 +10,9 @@ namespace WpfApp5.DB
 
         public string PathImage { get; set; }
 
+
+        public int? DepartmentId { get; set; }
+        public Department? Department { get; set; }
+
     }
 }

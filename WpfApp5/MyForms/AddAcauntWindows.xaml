@@ -14,14 +14,14 @@
            MinHeight="500" MinWidth="500"
            HorizontalAlignment="Center" Margin="25">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"  />
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="8*"  />
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="104*"/>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="82*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*" MinWidth="200"/>
@@ -29,22 +29,22 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0"
-               Grid.Row="1" Margin="20,0,0,0"
+               Grid.Row="1" Margin="41,0,0,0"
                VerticalAlignment="Center"
-               HorizontalAlignment="Right"
+               HorizontalAlignment="Left" Height="26" Width="159"
                >Укажите имя пользователя</Label>
 
         <TextBox Grid.Column="1" Grid.Row="1" Name="tbName" MinWidth="350"
          VerticalAlignment="Center"
                  Margin="0,0,2,0"
                  Padding="5"
-                 HorizontalContentAlignment="Center" />
+                 HorizontalContentAlignment="Center" Height="28" />
 
         <Label Grid.Column="0"
                Grid.Row="2" 
-               Margin="0,0,2,0"
+               Margin="61,0,0,0"
                VerticalAlignment="Center"
-               HorizontalAlignment="Right"
+               HorizontalAlignment="Left" Height="26" Width="137"
                >Выберите  фотографию</Label>
 
         <ComboBox Grid.Column="1"
@@ -65,8 +65,20 @@
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            
+
         </ComboBox>
+
+
+        <ComboBox Name="cbDepatment" Margin="5,5,5,5"
+                  Grid.Column="1" Grid.Row="3"
+                  ></ComboBox>
+
+        <Label Grid.Column="0"
+               Grid.Row="3" 
+               Margin="34,0,0,0"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Left" Height="26" Width="164"
+               >Выберите отдел сотрудника</Label>
 
         <Button MaxWidth="100"
             Grid.Column="1" Grid.Row="4"

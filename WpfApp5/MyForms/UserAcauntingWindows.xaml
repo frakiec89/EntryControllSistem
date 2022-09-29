@@ -57,6 +57,23 @@
                 
                 >Имя пользователя</Label>
 
+            <StackPanel
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Label Margin="2"
+                       VerticalAlignment="Center"
+                       >отд.</Label>
+                <Label
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    MinWidth="20" Name="lbDep"/>
+
+                <Button x:Name="btChangeDep"
+                        VerticalAlignment="Center"
+                        Margin="2" Padding="2"
+                        Click="btChangeDep_Click"
+                        >ред.</Button>
+            </StackPanel>
             <Button x:Name="btnSave" Margin="5" HorizontalAlignment="Center"
                     Click="btnSave_Click"
                     >
@@ -76,7 +93,6 @@
                     Click="btDellAccaunt_Click" Padding="5"
                     >Удалить пользователя</Button>
         </StackPanel>
-
 
         <DataGrid Margin="10"
                   AutoGenerateColumns="False"

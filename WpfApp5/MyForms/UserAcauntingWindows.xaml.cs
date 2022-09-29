@@ -61,12 +61,16 @@ namespace WpfApp5.MyForms
             DB.MyContext myContext = new DB.MyContext(); // подключение  к  бд
             try
             {
-                _Acaunt = myContext.Acaunts.Single(x => x.AcauntId == _acauntId); // нашли пользователя  - пригодиться 
+                _Acaunt = myContext.Acaunts.Include(x=>x.Department).Single(x => x.AcauntId == _acauntId); // нашли пользователя  - пригодиться 
                 this.Title = $"Редактировать  профиль {_Acaunt.Name}"; // изменили шапку 
                 imageAcaunt.Source = GetImage(_Acaunt.PathImage); // нашли картинку  - по  названю  картинки  из бд 
                 tbName.Text = _Acaunt.Name; // задали полу  с  именем  пользователя 
                 dataGridAcauntimg.ItemsSource = myContext.EntryControls.Where(x=> x.AcauntId == _acauntId).  
-                    OrderBy(x=>x.DateTimeEntryControl).ToList(); // нашли все входы пользователя в  бд  - отсортировали по дате 
+                OrderBy(x=>x.DateTimeEntryControl).ToList(); // нашли все входы пользователя в  бд  - отсортировали по дате 
+                if (_Acaunt.Department != null)
+                    lbDep.Content = _Acaunt.Department.Name;
+                else
+                    lbDep.Content = "Без отдела";
             }
             catch (Exception ex)
             {
@@ -95,7 +99,6 @@ namespace WpfApp5.MyForms
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             _Acaunt.Name = tbName.Text; // получили новое  имя  для пользователя 
-            
             DB.MyContext myContext = new DB.MyContext();
             try
             {
@@ -230,6 +233,17 @@ namespace WpfApp5.MyForms
                 {
                     MessageBox.Show(ex.Message);
                 }
+            }
+        }
+
+        private void btChangeDep_Click(object sender, RoutedEventArgs e)
+        {
+            MyForms.DepartmentWindow departmentWindow = new DepartmentWindow();
+            if (departmentWindow.ShowDialog() == true)
+            {
+                lbDep.Content = departmentWindow.selectDepetment.Name;
+                _Acaunt.DepartmentId = departmentWindow.selectDepetment.DepartmentId;
+                btnSave.Visibility = Visibility.Visible;
             }
         }
     }

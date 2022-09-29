@@ -21,6 +21,8 @@ namespace WpfApp5.ModelView
         /// ид  пользователя - нужен для идентефикации 
         /// </summary>
         public int IdAccaunt { get; set; }
+        public int? idDepartment { get; set; }
+
 
         /// <summary>
         /// путь к  картинке 

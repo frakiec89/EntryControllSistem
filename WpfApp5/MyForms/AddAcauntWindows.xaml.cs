@@ -34,8 +34,23 @@ namespace WpfApp5.MyForms
         private void AddAcauntWindows_Loaded(object sender, RoutedEventArgs e)
         {
             cbImage.ItemsSource = ImageController.GetImage(); // получам картинки  из контроллера  в  комбобокс 
+            cbDepatment.ItemsSource = GetDepetmant();
         }
-      
+
+        private List<DB.Department> GetDepetmant()
+        {
+            DB.MyContext myContext = new DB.MyContext(); // подключение  к  бд 
+            try
+            {
+               return   myContext.Departments.OrderBy(x => x.Name).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
+        }
+
         /// <summary>
         /// добавить пользователя  в  бд
         /// </summary>
@@ -53,6 +68,16 @@ namespace WpfApp5.MyForms
                     return;
                 }
 
+
+                var depapment = cbDepatment.SelectedItem as DB.Department;
+
+                if(depapment==null)
+                {
+                    MessageBox.Show("Выберите отдел"); // иначе  выведем  пользователю 
+                    return; //выйдем 
+                }
+
+                newAcaunt.DepartmentId = depapment.DepartmentId;
                 newAcaunt.Name = tbName.Text; // имя для него  из  текстбокса 
                 var image = cbImage.SelectedItem as ModelImage; // картинка из  комбобокса 
                 if (image != null) // если  не  нулевая  картинка 

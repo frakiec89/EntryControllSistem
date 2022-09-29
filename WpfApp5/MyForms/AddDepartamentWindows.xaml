@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfApp5.MyForms.AddDepartamentWindows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5.MyForms"
+        mc:Ignorable="d"
+        Title="Новый отдел" MinHeight="200" MinWidth="300"
+        SizeToContent="WidthAndHeight"
+        >
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5">укажите имя отдела:</Label>
+                <TextBox x:Name="tbName" Margin="5"
+                         MinWidth="150"
+                         ></TextBox>
+            </StackPanel>
+
+            <Button HorizontalAlignment="Center" 
+                    Padding="5"
+                    Margin="5"
+                    x:Name="btnSave" Click="btnSave_Click">
+                Сохранить в БД</Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -215,5 +215,11 @@ namespace WpfApp5
             var user = listContent.SelectedItem as ModelView.EntryControlView; // находим выбранного  пользователя  в листбоксе 
             GoToAcauntClick(user, e); // вызываем метод  - как будто  нажали на кнопку  - в  сендер  передадим  акаунт 
         }
+
+        private void btAddDep_Click(object sender, RoutedEventArgs e)
+        {
+            MyForms.AddDepartamentWindows addDepartamentWindows = new MyForms.AddDepartamentWindows();
+            addDepartamentWindows.ShowDialog();
+        }
     }
 }

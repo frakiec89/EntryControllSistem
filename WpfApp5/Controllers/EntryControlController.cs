@@ -29,8 +29,9 @@ namespace WpfApp5.Controllers
 
                     newModelAcaunting.Name = acauntDb.Name;
 
-                    newModelAcaunting.NameEdnMessage = $"Пользователь: {acauntDb.Name} -->>> " +
-                        $"последний вход {GetLastEntry(acauntDb.AcauntId)}";
+                    newModelAcaunting.NameEdnMessage = $"Пользователь: {acauntDb.Name}, " +
+                        $"отд. - {GetDepartament(acauntDb.AcauntId)}, " + 
+                        $"последний вход --> {GetLastEntry(acauntDb.AcauntId)}";
                     newModelAcaunting.MyPathImage = @"pack://application:,,,/AcauntImage/" + acauntDb.PathImage;
 
                     newModelAcaunting.ColorBorder = GetColorColorBorder(DateTime.Now , acauntDb.AcauntId);
@@ -39,6 +40,10 @@ namespace WpfApp5.Controllers
                     newModelAcaunting.ColorBorder4 = GetColorColorBorder(DateTime.Now.AddDays(-3), acauntDb.AcauntId);
                     newModelAcaunting.ColorBorder5 = GetColorColorBorder(DateTime.Now.AddDays(-4), acauntDb.AcauntId);
                     newModelAcaunting.IdAccaunt = acauntDb.AcauntId;
+                   
+                    if(acauntDb.DepartmentId !=null)
+                        newModelAcaunting.idDepartment = acauntDb.DepartmentId.Value;
+
                     listResult.Add(newModelAcaunting);
                 }
 
@@ -48,6 +53,23 @@ namespace WpfApp5.Controllers
             {
                 throw new Exception( meserror + ex.Message );
             }
+        }
+
+        private object GetDepartament(int acauntId)
+        {
+            try
+            {
+                var acaunt = MyContext.Acaunts.SingleOrDefault(x => x.AcauntId == acauntId);
+                if (acaunt.DepartmentId== null)
+                    return "без отдела";
+                else
+                    return MyContext.Departments.Single(x => x.DepartmentId == acaunt.DepartmentId).Name;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ошибка  при  обращении  к БД ");
+            }
+
         }
 
         private string GetColorColorBorder(DateTime now, int acauntId)

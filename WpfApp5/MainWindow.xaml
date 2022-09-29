@@ -60,6 +60,10 @@
                 </Grid>
             </Button>
 
+            <Button x:Name="btAddDep" Click="btAddDep_Click"
+                    Margin="5" 
+                    >Добавить  отдел</Button>
+
 
             <Label Margin="5,5,4,0" HorizontalAlignment="Center"
                    VerticalAlignment="Top" VerticalContentAlignment="Top"
